@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -26,11 +27,16 @@ import com.example.tweakster.Adapter.AppAdapter;
 import com.example.tweakster.Model.AppInfo;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.sufficientlysecure.rootcommands.Shell;
+import org.sufficientlysecure.rootcommands.command.SimpleCommand;
+
+import java.io.IOException;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 public class ListFragment extends Fragment {
 
@@ -66,17 +72,45 @@ public class ListFragment extends Fragment {
         swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeRefresh);
         listView.setTextFilterEnabled(true);
 
-     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
          @Override
          public void onItemClick(AdapterView<?> parent, View view, int postition, long id) {
+
+             // start root shell
+
+             Shell shell = null;
+             try {
+                 shell = Shell.startRootShell();
+             } catch (IOException e) {
+                 e.printStackTrace();
+             }
              AppInfo app = (AppInfo)parent.getItemAtPosition(postition);
 
-             Intent myIntent = getActivity().getPackageManager().getLaunchIntentForPackage(app.info.packageName);
-
-             if(myIntent == null){
-                 Toast.makeText(getActivity().getApplicationContext(), "No launcher attached to this app", Toast.LENGTH_SHORT).show();
+             if(app.info.packageName == null){
+                 Toast.makeText(getActivity().getApplicationContext(), "can not find package name", Toast.LENGTH_SHORT).show();
              } else {
-                 startActivity(myIntent);
+                    if(){
+
+                    }
+                 SimpleCommand perm = new SimpleCommand("pm grant " + app.info.packageName + " android.permission.WRITE_SECURE_SETTINGS");
+
+                 try {
+                     shell.add(perm).waitForFinish();
+                 } catch (TimeoutException e) {
+                     e.printStackTrace();
+                 } catch (IOException e) {
+                     e.printStackTrace();
+                 }
+
+                 Toast.makeText(getActivity().getApplicationContext(),  app.info.packageName + " was given \"write Secure Settings\" Permission", Toast.LENGTH_SHORT).show();
+                 // close root shell
+                 try {
+                     shell.close();
+                 } catch (IOException e) {
+                     e.printStackTrace();
+                 }
              }
          }
      });

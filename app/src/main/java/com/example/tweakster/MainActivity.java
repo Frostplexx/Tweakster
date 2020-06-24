@@ -19,6 +19,8 @@ import com.google.android.material.behavior.SwipeDismissBehavior;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.sufficientlysecure.rootcommands.RootCommands;
+
 import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +37,15 @@ public class MainActivity extends AppCompatActivity{
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new HomeFragment()).commit();
 
+        if (RootCommands.rootAccessGiven()) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new HomeFragment()).commit();
+        } else {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new NoRootFragment()).commit();
+
+        }
 
 
     }
