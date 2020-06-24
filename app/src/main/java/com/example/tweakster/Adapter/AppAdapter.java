@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tweakster.ListFragment;
 import com.example.tweakster.Model.AppInfo;
 import com.example.tweakster.R;
 
@@ -19,13 +20,14 @@ import java.util.List;
 
 public class AppAdapter extends ArrayAdapter<AppInfo> {
 
+    public static Context mContext;
     LayoutInflater layoutInflater;
     PackageManager packageManager;
     List<AppInfo> apps;
-    public AppAdapter(Context context, List<AppInfo> apps) {
-        super(context, R.layout.app_item_layout, apps);
-        layoutInflater = LayoutInflater.from(context);
-        packageManager = context.getPackageManager();
+    public AppAdapter(ListFragment context, List<AppInfo> apps) {
+        super(mContext, R.layout.app_item_layout, apps);
+        layoutInflater = LayoutInflater.from(mContext);
+        packageManager = context.getActivity().getPackageManager();
         this.apps = apps;
     }
 

@@ -23,10 +23,11 @@ import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-    ListView listView;
-    SwipeRefreshLayout swipeRefreshLayout;
-    boolean mIncludeSystemApps;
+public class MainActivity extends AppCompatActivity{
+
+
+    private HomeFragment fragmentA;
+    private ListFragment fragmentB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,84 +38,9 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new HomeFragment()).commit();
 
-        listView = (ListView)findViewById(R.id.listView);
-        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeRefresh);
-        listView.setTextFilterEnabled(true);
-
-
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refreshIt();
-            }
-
-
-        });
-
-
-
 
 
     }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        LoadAppInfoTask loadAppInfoTask = new LoadAppInfoTask();
-        loadAppInfoTask.execute(PackageManager.GET_META_DATA);
-    }
-
-    private void refreshIt() {
-        LoadAppInfoTask loadAppInfoTask = new LoadAppInfoTask();
-        loadAppInfoTask.execute(PackageManager.GET_META_DATA);
-    }
-
-
-
-    class LoadAppInfoTask extends AsyncTask<Integer,Integer, List<AppInfo>> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            swipeRefreshLayout.setRefreshing(true);
-        }
-
-        @Override
-        protected List<AppInfo> doInBackground(Integer... params) {
-
-            List<AppInfo> apps = new ArrayList<>();
-            PackageManager packageManager = getPackageManager();
-
-            List<ApplicationInfo> infos = packageManager.getInstalledApplications(params[0]);
-
-
-            for(ApplicationInfo info:infos){
-                if(mIncludeSystemApps && (info.flags & ApplicationInfo.FLAG_SYSTEM) == 1){
-                    continue;
-                }
-
-                AppInfo app = new AppInfo();
-                app.info = info;
-                app.label = (String) info.loadLabel(packageManager);
-                apps.add(app);
-            }
-            //sort data
-            return apps;
-        }
-
-        @Override
-        protected void onPostExecute(List<AppInfo> appInfos) {
-            super.onPostExecute(appInfos);
-            listView.setAdapter(new AppAdapter(MainActivity.this, appInfos));
-            swipeRefreshLayout.setRefreshing(false);
-            Snackbar.make(listView, appInfos.size() + " Applications loaded", Snackbar.LENGTH_LONG).show();
-        }
-    }
-
-
-
-
-
 
 
 
