@@ -91,9 +91,7 @@ public class ListFragment extends Fragment {
              if(app.info.packageName == null){
                  Toast.makeText(getActivity().getApplicationContext(), "can not find package name", Toast.LENGTH_SHORT).show();
              } else {
-                    if(){
 
-                    }
                  SimpleCommand perm = new SimpleCommand("pm grant " + app.info.packageName + " android.permission.WRITE_SECURE_SETTINGS");
 
                  try {
