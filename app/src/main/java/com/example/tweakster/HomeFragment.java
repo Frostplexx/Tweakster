@@ -1,5 +1,6 @@
 package com.example.tweakster;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -30,6 +31,7 @@ public class HomeFragment  extends Fragment {
     public interface FragHomeListener{
         void onInputHomeSent(CharSequence input);
     }
+    @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,6 +57,11 @@ public class HomeFragment  extends Fragment {
             busyBoxtxt.setTextColor(Color.RED);
         }
 
+
+
+        ((TextView)v.findViewById(R.id.OS)).setText(android.os.Build.VERSION.RELEASE + " (" + android.os.Build.VERSION.SDK + ")");
+        ((TextView)v.findViewById(R.id.informationdevicemodel)).setText(android.os.Build.MODEL);
+        ((TextView)v.findViewById(R.id.informationdevice)).setText(android.os.Build.DEVICE);
         return v;
     }
 

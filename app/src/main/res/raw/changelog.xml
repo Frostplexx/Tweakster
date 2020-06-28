@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelog bulletedList="true">
+
+    <changelogversion versionName="0.1" changeDate="Jun 29, 2020">
+        <changelogtext>[b]New![/b] This is a changelog test!</changelogtext>
+        <changelogtext>Lorem ipsum dolor sit amet, consectetur adipiscing elit </changelogtext>
+        <changelogtext>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</changelogtext>
+        <changelogtext> enim ad minim veniam </changelogtext>
+        <changelogtext>quis nostrud exercitation ullamco laboris</changelogtext>
+    </changelogversion>
+
+    <changelogversion versionName="0.1" changeDate="Jun 29, 2020">
+        <changelogtext>Initial alpha release.</changelogtext>
+    </changelogversion>
+</changelog>

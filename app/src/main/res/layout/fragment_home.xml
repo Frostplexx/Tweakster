@@ -205,6 +205,19 @@
         android:layout_alignTop="@+id/toolbar"
         app:srcCompat="@drawable/round_rect_shape" />
 
+    <it.gmariotti.changelibs.library.view.ChangeLogRecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/bigRect"
+        android:layout_alignBottom="@+id/bigRect"
+        android:layout_alignStart="@+id/bigRect"
+        android:layout_alignEnd="@+id/bigRect"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="50dp"/>
+        
+
     <TextView
         android:id="@+id/changelog"
         android:layout_width="wrap_content"
@@ -232,17 +245,86 @@
         app:srcCompat="@drawable/round_rect_shape" />
 
     <TextView
-        android:id="@+id/other"
+        android:id="@+id/deviceInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/bottomRect"
         android:layout_alignParentStart="true"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="55dp"
-        android:text="Other:"
+        android:text="Device Info:"
         android:textSize="30sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/device"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/bottomRect"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:textSize="15sp"
+        android:layout_marginBottom="40dp"
+        android:text="Device:"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/informationdevice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/bottomRect"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="75dp"
+        android:textSize="15sp"
+        android:layout_marginBottom="40dp"
+        android:text="placeholder"/>
+
+    <TextView
+        android:id="@+id/Model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/bottomRect"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:textSize="15sp"
+        android:layout_marginBottom="25dp"
+        android:text="Model:"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/informationdevicemodel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/bottomRect"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="75dp"
+        android:textSize="15sp"
+        android:layout_marginBottom="25dp"
+        android:text="placeholder"/>
+
+    <TextView
+        android:id="@+id/OSversion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/bottomRect"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:textSize="15sp"
+        android:layout_marginBottom="10dp"
+        android:text="OS Version: "
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/OS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/bottomRect"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="100dp"
+        android:textSize="15sp"
+        android:layout_marginBottom="10dp"
+        android:text="placeholder"
+        />
 
 
 </RelativeLayout>
