@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.Adapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tweakster.Adapter.AppAdapter;
 import com.example.tweakster.Model.AppInfo;
@@ -30,19 +31,22 @@ import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeoutException;
 
 public class MainActivity extends AppCompatActivity {
-
 
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // start root shell
+
+        Shell shell = null;
         try {
-            Shell shell = Shell.startRootShell();
+            shell = Shell.startRootShell();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -51,20 +55,33 @@ public class MainActivity extends AppCompatActivity {
 
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new HomeFragment()).commit();
+        SimpleCommand command1 = new SimpleCommand("busybox");
 
-        if (RootCommands.rootAccessGiven()) {
+        try {
+            shell.add(command1).waitForFinish();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //BuyBox check
+        if(command1.getOutput().contains("not found")){
             transaction.replace(R.id.fragment_container,
-                    HomeFragment.isRooted(true)).commit();
+                    HomeFragment.hasBusyBox(false));
         } else {
             transaction.replace(R.id.fragment_container,
-                    HomeFragment.isRooted(false)).commit();
-        }
-        SimpleCommand command1 = new SimpleCommand("toolbox ls");
-        if(new SimpleCommand("test -h /bin/ls && test `readlink /bin/ls` = busybox") == true){
-            
+                    HomeFragment.hasBusyBox(true));
         }
 
-
+        //root Check
+        if (RootCommands.rootAccessGiven()) {
+            transaction.replace(R.id.fragment_container,
+                    HomeFragment.isRooted(true));
+        } else {
+            transaction.replace(R.id.fragment_container,
+                    HomeFragment.isRooted(false));
+        }
+        transaction.commit();
     }
 
 

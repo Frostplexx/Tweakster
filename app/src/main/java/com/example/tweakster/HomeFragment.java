@@ -23,7 +23,8 @@ public class HomeFragment  extends Fragment {
     private EditText editText;
     private Button buttonOk;
     private TextView textView;
-    static public boolean test;
+    static public boolean isroot;
+    static public boolean busyBox;
     String rooted;
 
     public interface FragHomeListener{
@@ -35,8 +36,9 @@ public class HomeFragment  extends Fragment {
        View v = inflater.inflate(R.layout.fragment_home, container, false);
 
     TextView root = (TextView)v.findViewById(R.id.root);
+    TextView busyBoxtxt = (TextView)v.findViewById(R.id.busyBox);
 
-        if (test){
+        if (isroot){
             root.setText("rooted");
             root.setTextColor(Color.GREEN);
         } else {
@@ -44,6 +46,14 @@ public class HomeFragment  extends Fragment {
             root.setTextColor(Color.RED);
         }
 
+
+        if (busyBox){
+            busyBoxtxt.setText("present");
+            busyBoxtxt.setTextColor(Color.GREEN);
+        } else {
+            busyBoxtxt.setText("not present");
+            busyBoxtxt.setTextColor(Color.RED);
+        }
 
         return v;
     }
@@ -56,7 +66,14 @@ public class HomeFragment  extends Fragment {
 
     public static Fragment isRooted(boolean b) {
         if (b) {
-            test = true;
+            isroot = true;
+        }
+        return new HomeFragment();
+    }
+
+    public static Fragment hasBusyBox(boolean b) {
+        if (b) {
+            busyBox = true;
         }
         return new HomeFragment();
     }
