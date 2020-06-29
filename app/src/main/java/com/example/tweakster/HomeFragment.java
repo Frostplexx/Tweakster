@@ -10,12 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import org.sufficientlysecure.rootcommands.Shell;
+import org.sufficientlysecure.rootcommands.command.SimpleCommand;
+
+import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 import java.util.zip.CheckedOutputStream;
 
 
@@ -37,7 +43,7 @@ public class HomeFragment  extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
        View v = inflater.inflate(R.layout.fragment_home, container, false);
 
-    TextView root = (TextView)v.findViewById(R.id.root);
+        TextView root = (TextView)v.findViewById(R.id.root);
     TextView busyBoxtxt = (TextView)v.findViewById(R.id.busyBox);
 
         if (isroot){
@@ -62,6 +68,170 @@ public class HomeFragment  extends Fragment {
         ((TextView)v.findViewById(R.id.OS)).setText(android.os.Build.VERSION.RELEASE + " (" + android.os.Build.VERSION.SDK + ")");
         ((TextView)v.findViewById(R.id.informationdevicemodel)).setText(android.os.Build.MODEL);
         ((TextView)v.findViewById(R.id.informationdevice)).setText(android.os.Build.DEVICE);
+
+
+
+        final ImageButton recovery = (ImageButton)v.findViewById(R.id.recovery);
+        recovery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SimpleCommand command0 = new SimpleCommand("reboot recovery");
+                Shell shell = null;
+                try {
+                    shell = Shell.startRootShell();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    shell.add(command0).waitForFinish();
+                } catch (TimeoutException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    shell.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        final ImageButton bootloader = (ImageButton)v.findViewById(R.id.bootloader);
+        bootloader.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SimpleCommand command0 = new SimpleCommand("reboot bootloader");
+                Shell shell = null;
+                try {
+                    shell = Shell.startRootShell();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    shell.add(command0).waitForFinish();
+                } catch (TimeoutException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    shell.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        final ImageButton system = (ImageButton)v.findViewById(R.id.system);
+        system.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SimpleCommand command0 = new SimpleCommand("reboot");
+                Shell shell = null;
+                try {
+                    shell = Shell.startRootShell();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    shell.add(command0).waitForFinish();
+                } catch (TimeoutException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    shell.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        final Button systemUI = (Button)v.findViewById(R.id.SysUI);
+        systemUI.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SimpleCommand command0 = new SimpleCommand("am start com.android.systemui/com.android.systemui.DemoMode");
+                Shell shell = null;
+                try {
+                    shell = Shell.startRootShell();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    shell.add(command0).waitForFinish();
+                } catch (TimeoutException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    shell.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        final Button radio = (Button)v.findViewById(R.id.radio);
+        radio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SimpleCommand command0 = new SimpleCommand("am start com.android.settings/com.android.settings.RadioInfo");
+                Shell shell = null;
+                try {
+                    shell = Shell.startRootShell();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    shell.add(command0).waitForFinish();
+                } catch (TimeoutException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    shell.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        final Button magisk = (Button)v.findViewById(R.id.magisk);
+        magisk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SimpleCommand command0 = new SimpleCommand("am start com.topjohnwu.magisk/a.b");
+                Shell shell = null;
+                try {
+                    shell = Shell.startRootShell();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    shell.add(command0).waitForFinish();
+                } catch (TimeoutException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    shell.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         return v;
     }
 
