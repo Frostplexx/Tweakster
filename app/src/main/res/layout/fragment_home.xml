@@ -104,7 +104,7 @@
         />
 
     <Button
-        android:id="@+id/magisk"
+        android:id="@+id/net"
         android:layout_width="wrap_content"
         android:layout_height="57dp"
         android:layout_alignTop="@+id/imageView"
@@ -114,9 +114,9 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:layout_marginEnd="32dp"
-        android:drawableLeft="@drawable/ic_baseline_open_in_new_24"
-        android:text="Open Magisk" />
-
+        android:drawableLeft="@drawable/ic_baseline_security_24"
+        android:text="Safety Net"
+        android:background="@drawable/button"/>
     <ImageView
         android:id="@+id/middleRect"
         android:layout_width="match_parent"

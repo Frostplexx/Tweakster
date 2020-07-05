@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.widget.Adapter;
 import android.widget.ListView;
@@ -36,10 +38,14 @@ import java.util.concurrent.TimeoutException;
 
 public class MainActivity extends AppCompatActivity {
 
+
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // start root shell
+
+
+
 
         Shell shell = null;
         try {
@@ -51,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
@@ -115,8 +122,6 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             };
-
-
 
 
 
