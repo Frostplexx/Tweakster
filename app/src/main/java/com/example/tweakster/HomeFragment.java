@@ -179,32 +179,7 @@ public class HomeFragment  extends Fragment {
             }
         });
 
-        final Button radio = (Button)v.findViewById(R.id.radio);
-        radio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SimpleCommand command0 = new SimpleCommand("am start com.android.settings/com.android.settings.RadioInfo");
-                Shell shell = null;
-                try {
-                    shell = Shell.startRootShell();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    shell.add(command0).waitForFinish();
-                } catch (TimeoutException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    shell.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+       
 
         final Button magisk = (Button)v.findViewById(R.id.net);
         magisk.setOnClickListener(new View.OnClickListener() {
