@@ -206,35 +206,15 @@ public class HomeFragment  extends Fragment {
             }
         });
 
-        final Button magisk = (Button)v.findViewById(R.id.magisk);
+        final Button magisk = (Button)v.findViewById(R.id.net);
         magisk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SimpleCommand command0 = new SimpleCommand("am start com.topjohnwu.magisk/a.b");
-                Shell shell = null;
-                try {
-                    shell = Shell.startRootShell();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    shell.add(command0).waitForFinish();
-                } catch (TimeoutException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
 
-                try {
-                    shell.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         });
         return v;
     }
-
 
 
 
