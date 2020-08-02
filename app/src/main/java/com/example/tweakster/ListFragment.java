@@ -182,7 +182,7 @@ public class ListFragment extends Fragment {
 
     }
 
-    private class DNComparator implements Comparator<AppInfo> {
+    private static class DNComparator implements Comparator<AppInfo> {
 
         @Override
         public int compare(AppInfo aa, AppInfo ab) {
